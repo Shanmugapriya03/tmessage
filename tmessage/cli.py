@@ -19,6 +19,9 @@ parser = argparse.ArgumentParser(prog='AMU-OSS-MESSAGING',
 parser.add_argument('--user', action='store', type=str, required=True)
 parser.add_argument('--server', action='store', type=str)
 parser.add_argument('--port', action='store', type=int)
+parser.add_argument('--store', dest='store', action='store_true')
+parser.add_argument('--dont_store', dest='store', action='store_false')
+parser.set_defaults(store=True)
 
 args = parser.parse_args()
 
@@ -40,7 +43,8 @@ def on_message(client, userdata, message):
         print(Back.GREEN + Fore.BLACK + current_msg +
               Back.RESET + Fore.RESET + "")
         _, _, message = current_msg.partition('] ')
-        store_messages(user, message)
+        if args.store == True:
+            store_messages(user, message)
 
 
 folder_name = 'messages'
@@ -90,7 +94,8 @@ def main():
             pub_msg = f'[{user_name}] {displayed_name}: {raw_msg}'
             if raw_msg != '':
                 mqtt_client.publish(MQTT_TOPIC, pub_msg)
-                store_messages(current_user, raw_msg)
+                if args.store == True:
+                    store_messages(current_user, raw_msg)
             else:
                 print(Back.WHITE + Fore.RED +
                       "Can't send empty message", end='\n')
