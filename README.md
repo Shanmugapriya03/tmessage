@@ -15,6 +15,8 @@
 * Switch to your venv using ```source venv/bin/activate```
 * Now install the required dependencies by running ```pip install .```
 * Now to run tmessage use ```tmessage --user [YOUR USERNAME] --port [PORT (optional)] --server [YOUR BROKER IP OR URL (optional)]```
+* To store messages use ```tmessage --user [YOUR USERNAME] --store``` or ```tmessage --user [YOUR USERNAME]```
+* To disable storing of messages use ```tmessage --user [YOUR USERNAME] --dont_store```
 * To test this you can open different terminal tabs.
 
 ### Some optional instructions for PROs ;)
